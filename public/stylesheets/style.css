@@ -1,0 +1,14 @@
+	.schedule{
+	width: 93px;
+    height: 100px;
+    overflow: hidden;
+    padding: 8px 0 0 0;
+    float: left;
+    display: block;
+    border-left: 1px solid #707082;
+    vertical-align: top;
+    text-align: center;
+    position: relative;	
+    background: #313150;
+	}
+	
