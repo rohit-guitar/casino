@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "deploy": "gcloud preview app deploy app.yaml --promote --project ecstatic-acumen-111721"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,7 +13,9 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
+    "mysql": "^2.5.4",
     "serve-favicon": "~2.3.0",
-    "swig": "^1.4.2"
+    "swig": "^1.4.2",
+    "tunnel-ssh": "^2.0.0"
   }
 }

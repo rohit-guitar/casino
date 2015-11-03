@@ -9,19 +9,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Casino</title>
+    <title>{{pagename}}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/public/stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <!-- <link href="/public/stylesheets/sb-admin.css" rel="stylesheet"> -->
+    <link href="/public/stylesheets/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <!-- <link href="/public/stylesheets/plugins/morris.css" rel="stylesheet"> -->
+    <link href="/public/stylesheets/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <!-- <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -207,11 +207,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
+                                        <i class="fa fa-bar-chart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">26</div>
-                                        <div>New Comments!</div>
+                                        <div>Total Bets Placed</div>
                                     </div>
                                 </div>
                             </div>
@@ -229,11 +229,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
+                                        <i class="fa fa-usd fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                        <div>Money Line Bets</div>
                                     </div>
                                 </div>
                             </div>
@@ -251,11 +251,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                        <i class="fa fa-usd fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">124</div>
-                                        <div>New Orders!</div>
+                                        <div>Point Spread Bets</div>
                                     </div>
                                 </div>
                             </div>
@@ -273,11 +273,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
+                                        <i class="fa fa-usd fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
+                                        <div>Total Bets</div>
                                     </div>
                                 </div>
                             </div>
@@ -333,12 +333,12 @@
                                         <thead>
                                             <tr>
                                                 <th>Teams</th>
-                                                <th>Odds</th>
+                                                <th>Point Spread</th>
+                                                <th>Money Line</th>
+                                                <th>Total Bet</th>
                                                 <th>Schedule</th>
-                                                <th>col-4</th>
-                                                <th>col-5</th>
-                                                <th>col-6</th>
-                                                <th>col-7</th>
+                                                <th>Stadium</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -349,19 +349,8 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -376,19 +365,8 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -403,10 +381,24 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -556,17 +548,17 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="public/javascripts/jquery.js"></script>
+    <script src="/public/javascripts/jquery.js"></script>
 
 <!-- <script type="text/javascript" src="http://output83.rssinclude.com/output?type=js&amp;id=1030687&amp;hash=bb316aa0f42e2b1f7573f685c304997f"></script> -->
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="public/javascripts/bootstrap.min.js"></script>
+    <script src="/public/javascripts/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="public/javascripts/plugins/morris/raphael.min.js"></script>
-    <script src="public/javascripts/plugins/morris/morris.min.js"></script>
-    <script src="public/javascripts/plugins/morris/morris-data.js"></script>
+    <script src="/public/javascripts/plugins/morris/raphael.min.js"></script>
+    <script src="/public/javascripts/plugins/morris/morris.min.js"></script>
+    <script src="/public/javascripts/plugins/morris/morris-data.js"></script>
 
 </body>
 
