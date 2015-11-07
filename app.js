@@ -51,5 +51,5 @@ app.get('/', function(req, res, next) {
 // app.use('/users', users)
 
 module.exports = app;
-app.listen(port, hostname);
+app.listen(process.env.PORT || 3000);
 
