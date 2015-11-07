@@ -8,7 +8,7 @@ var swig  = require('swig');
 // var sequest = require('sequest')
 var bodyParser = require('body-parser'),
 	hostname = process.env.HOSTNAME || 'localhost',
-    port = process.env.PORT || 3000,
+    port = parseInt(process.env.PORT, 10) || 3000,
     publicDir = process.argv[2] || __dirname ;
 
 var app = express();
