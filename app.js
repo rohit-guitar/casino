@@ -1,10 +1,10 @@
 var express = require('express');
 var path = require('path');
-var mysql = require('mysql');
+// var mysql = require('mysql');
 var swig  = require('swig');
-var fs  = require('fs');
+// var fs  = require('fs');
 
-var tunnel = require('./routes/tunnel');
+// var tunnel = require('./routes/tunnel');
 // var sequest = require('sequest')
 var bodyParser = require('body-parser'),
 	hostname = process.env.HOSTNAME || 'localhost',
@@ -22,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(publicDir));
 app.use(express.static(path.join(__dirname, '/public')));
 
-var key = fs.readFileSync(process.env.HOME + '/.ssh/google_compute_engine');
+// var key = fs.readFileSync(process.env.HOME + '/.ssh/google_compute_engine');
 
 // sequest('radhikadesai@104.197.111.54', {
 //   command: 'ls',
