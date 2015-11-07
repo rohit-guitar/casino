@@ -5,7 +5,7 @@ var swig  = require('swig');
 var fs  = require('fs');
 
 var tunnel = require('./routes/tunnel');
-var sequest = require('sequest')
+// var sequest = require('sequest')
 var bodyParser = require('body-parser'),
 	hostname = process.env.HOSTNAME || 'localhost',
     port = process.env.PORT || 3000,
@@ -24,19 +24,19 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 var key = fs.readFileSync(process.env.HOME + '/.ssh/google_compute_engine');
 
-sequest('radhikadesai@104.197.111.54', {
-  command: 'ls',
-  privateKey: key
-  }, function (err, stdout) {
-    console.log("tunnelPort : ",tunnel())
-	// var connection = mysql.createConnection({
- //  		  host     : '104.197.111.54',
-	// 	  user     : 'root',
-	// 	  password : 'casino',
-	// 	  database : 'casinonew'
-	// });
-	// connection.connect();
-});
+// sequest('radhikadesai@104.197.111.54', {
+//   command: 'ls',
+//   privateKey: key
+//   }, function (err, stdout) {
+//     console.log("tunnelPort : ",tunnel())
+// 	// var connection = mysql.createConnection({
+//  //  		  host     : '104.197.111.54',
+// 	// 	  user     : 'root',
+// 	// 	  password : 'casino',
+// 	// 	  database : 'casinonew'
+// 	// });
+// 	// connection.connect();
+// });
 app.get('/', function(req, res, next) {
 	// console.log("connection object : ",connection);
 	// connection.query('SELECT Name from conference', function(err, rows, fields) {
