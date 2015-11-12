@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-// var mysql = require('mysql');
+var mysql = require('mysql');
 var swig  = require('swig');
 // var fs  = require('fs');
 
@@ -22,33 +22,31 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(publicDir));
 app.use(express.static(path.join(__dirname, '/public')));
 
-// var key = fs.readFileSync(process.env.HOME + '/.ssh/google_compute_engine');
+var con = mysql.createConnection({
+  host: "173.194.232.115",
+  user: "root",
+  password: "casino",
+  database : "casino"
+});
 
-// sequest('radhikadesai@104.197.111.54', {
-//   command: 'ls',
-//   privateKey: key
-//   }, function (err, stdout) {
-//     console.log("tunnelPort : ",tunnel())
-// 	// var connection = mysql.createConnection({
-//  //  		  host     : '104.197.111.54',
-// 	// 	  user     : 'root',
-// 	// 	  password : 'casino',
-// 	// 	  database : 'casinonew'
-// 	// });
-// 	// connection.connect();
-// });
+con.connect(function(err){
+    if(err){
+    	console.log('Error connecting to Db', err);
+    	return;
+    }
+	  	console.log('Connection established');
+	  	con.query('SELECT * FROM team',function(err,rows){
+	  	if(err) throw err;
+		console.log('Data received from Db:\n');
+		console.log(rows);
+	});
+});
+
+
 app.get('/', function(req, res, next) {
-	// console.log("connection object : ",connection);
-	// connection.query('SELECT Name from conference', function(err, rows, fields) {
- // 	 if (!err)
- //  	  console.log('The solution is: ', rows);
- // 	 else
- //   	 console.log('Error while performing Query.');
-	// });
   	res.render('index', { pagename: 'Casino',
     authors: ['Paul', 'Jim', 'Jane']});
 });	
-// app.use('/users', users)
 
 module.exports = app;
 app.listen(process.env.PORT || 3000);
