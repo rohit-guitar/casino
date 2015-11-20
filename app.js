@@ -26,7 +26,7 @@ var con = mysql.createConnection({
   host: "173.194.232.115",
   user: "root",
   password: "casino",
-  database : "casino"
+  database : "casinodb"
 });
 
 con.connect(function(err){
@@ -34,16 +34,45 @@ con.connect(function(err){
     	console.log('Error connecting to Db', err);
     	return;
     }
-	  	console.log('Connection established');
-	  	con.query('SELECT * FROM team',function(err,rows){
-	  	if(err) throw err;
-		console.log('Data received from Db:\n');
-		console.log(rows);
-	});
+	console.log('Connection established');
+	
+	app.post('/login', function(req, res, next) {
+	  	// console.log(req.body.email,req.body.password);
+	  	con.query('SELECT * FROM users WHERE Email = "'+req.body.email+'" AND password = "'+req.body.password+'"',
+	  		function(err,rows){
+	  		if(err) 
+	  		{
+	  			console.log("Error encountered : ",err);
+	  			throw err;
+	  		}
+	  		else{
+	  			console.log(rows)
+	  			if(rows.length==0){
+	  				//Print message 
+	  				res.render('login',{error:"AuthFail"});
+	  			}
+	  			else{
+		  			res.redirect('/index');	
+	  			}
+	  		}
+		});
+  		
+	});	
 });
 
-
 app.get('/', function(req, res, next) {
+  	res.render('login');
+
+});	
+
+
+
+app.get('/index', function(req, res, next) {
+	// If not logged in, go to login page
+	//1. Invoke function to talk to Livy server to submit spark job 
+	// i) First, check if DB has any data, else trigger spark job
+	//2. Get the betting odds and send as variables to index.html
+
   	res.render('index', { pagename: 'Casino',
     authors: ['Paul', 'Jim', 'Jane']});
 });	
