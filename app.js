@@ -49,7 +49,7 @@ con.connect(function(err){
 	  			console.log(rows)
 	  			if(rows.length==0){
 	  				//Print message 
-	  				res.render('login',{error:"AuthFail"});
+	  				res.render('login',{error:"Authentication Failed!"});
 	  			}
 	  			else{
 		  			res.redirect('/index');	

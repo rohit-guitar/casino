@@ -60,6 +60,10 @@
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
+.auth-fail{
+    text-align: center;
+    color: red;
+}
 .login-title
 {
     color: #555;
