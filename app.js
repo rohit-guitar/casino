@@ -37,7 +37,7 @@ con.connect(function(err){
 	console.log('Connection established');
 	
 	app.post('/login', function(req, res, next) {
-	  	// console.log(req.body.email,req.body.password);
+	  
 	  	con.query('SELECT * FROM users WHERE Email = "'+req.body.email+'" AND password = "'+req.body.password+'"',
 	  		function(err,rows){
 	  		if(err) 
@@ -57,7 +57,61 @@ con.connect(function(err){
 	  		}
 		});
   		
+	});
+	
+	app.get("/teams/all",function(req,res,next){
+		con.query("select distinct Name from ( select name from team2005 union select name from team2006 union select name from team2007 union select name from team2008 union select name from team2009) t3",
+	  		function(err,rows){
+	  		if(err) 
+	  		{
+	  			console.log("Error encountered : ",err);
+	  			throw err;
+	  		}
+	  		else{
+	  			var teams = [];
+	  			var i=0;
+	  			rows.forEach(function(row){
+	  				teams[i++] = row.Name;
+	  				// teams[i] = teams[i].replace(/"/g, "")
+	  			})
+	  			// console.log(teams);
+	  			res.send(teams);	
+	  		}
+		});
 	});	
+
+	app.post("/teams/performance",function(req,res,next){
+		var team = req.body.team;
+		var attribute = req.body.attribute;
+		con.query("select `Date`, `"+attribute+"` from game2005 ,statsMerged2  where game2005.`Game Code` = statsMerged2.`Game Code` and game2005.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2006 ,statsMerged2  where game2006.`Game Code` = statsMerged2.`Game Code` and game2006.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2007 ,statsMerged2  where game2007.`Game Code` = statsMerged2.`Game Code` and game2007.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2008 ,statsMerged2  where game2008.`Game Code` = statsMerged2.`Game Code` and game2008.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2009 ,statsMerged2  where game2009.`Game Code` = statsMerged2.`Game Code` and game2009.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2010 ,statsMerged2  where game2010.`Game Code` = statsMerged2.`Game Code` and game2010.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2011 ,statsMerged2  where game2011.`Game Code` = statsMerged2.`Game Code` and game2011.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2012 ,statsMerged2  where game2012.`Game Code` = statsMerged2.`Game Code` and game2012.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a))"+
+					"union "+
+					"select `Date`, `"+attribute+"` from game2013 ,statsMerged2  where game2013.`Game Code` = statsMerged2.`Game Code` and game2013.`Game Code` in (select `Game Code` from statsMerged2 where `Team Code` in (select `Team Code` from (select `Team Code` from team2005 where `Name`='"+team+"' union select `Team Code` from team2006 where `Name`='"+team+"' union select `Team Code` from team2007 where `Name`='"+team+"' union select `Team Code` from team2008 where `Name`='"+team+"' union select `Team Code` from team2009 where `Name`='"+team+"')a));",
+	  		function(err,rows){
+	  		if(err) 
+	  		{
+	  			console.log("Error encountered : ",err);
+	  			throw err;
+	  		}
+	  		else{
+	  			res.send(rows);	
+	  		}
+		});
+		console.log("REQ BODY **** ",req.body.team, req.body.attribute);
+	});
 });
 
 app.get('/', function(req, res, next) {
@@ -76,6 +130,10 @@ app.get('/index', function(req, res, next) {
   	res.render('index', { pagename: 'Casino',
     authors: ['Paul', 'Jim', 'Jane']});
 });	
+app.get("/teams",function(req,res,next){
+	res.render('teams')
+});
+
 
 module.exports = app;
 app.listen(process.env.PORT || 3000);

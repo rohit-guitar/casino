@@ -16,6 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="/public/stylesheets/sb-admin.css" rel="stylesheet">
+    <link href="/public/stylesheets/style.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="/public/stylesheets/plugins/morris.css" rel="stylesheet">
@@ -23,6 +24,7 @@
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+  <link rel="stylesheet" href="/public/stylesheets/bootstrap-datetimepicker.min.css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="/index.html">SB Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -153,13 +155,13 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Home</a>
+                        <a href="/index"><i class="fa fa-fw fa-dashboard"></i> Home</a>
                     </li>
                     <li>
-                        <a href="teams.html"><i class="fa fa-fw fa-bar-chart-o"></i> Teams </a>
+                        <a href="/teams"><i class="fa fa-fw fa-bar-chart-o"></i> Teams </a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Betting</a>
+                        <a href="/tables"><i class="fa fa-fw fa-table"></i> Betting</a>
                     </li>
                     <li>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription</a>
@@ -326,6 +328,14 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Weekly Schedule</h3>
+                                 <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -549,12 +559,17 @@
 
     <!-- jQuery -->
     <script src="/public/javascripts/jquery.js"></script>
+    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
 
 <!-- <script type="text/javascript" src="http://output83.rssinclude.com/output?type=js&amp;id=1030687&amp;hash=bb316aa0f42e2b1f7573f685c304997f"></script> -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/public/javascripts/bootstrap.min.js"></script>
-
+    <script type="/public/javascript" src="/public/javascripts/bootstrap-datetimepicker.min.js"></script>
     <!-- Morris Charts JavaScript -->
     <script src="/public/javascripts/plugins/morris/raphael.min.js"></script>
     <script src="/public/javascripts/plugins/morris/morris.min.js"></script>
