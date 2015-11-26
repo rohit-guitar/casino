@@ -1,5 +1,5 @@
 (function(){
-	var baseURL = "http://localhost:3000";
+	var baseURL = "https://glacial-anchorage-4989.herokuapp.com";
 	var request = $.ajax({
 	  url: baseURL + "/teams/all",
 	  method: "GET",
