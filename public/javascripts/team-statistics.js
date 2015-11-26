@@ -33,7 +33,7 @@ var teamLineChart = function(data){
   var line = d3.svg.line()
       .x(function(d) { return x(d.Date); })
       .y(function(d) { return y(d[attribute]); });
-
+  d3.select("svg").remove();
   var svg = d3.select("#flot-line-chart").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
