@@ -37,7 +37,6 @@ con.connect(function(err){
 	console.log('Connection established');
 	
 	app.post('/login', function(req, res, next) {
-	  
 	  	con.query('SELECT * FROM users WHERE Email = "'+req.body.email+'" AND password = "'+req.body.password+'"',
 	  		function(err,rows){
 	  		if(err) 
@@ -46,13 +45,13 @@ con.connect(function(err){
 	  			throw err;
 	  		}
 	  		else{
-	  			console.log(rows)
 	  			if(rows.length==0){
 	  				//Print message 
 	  				res.render('login',{error:"Authentication Failed!"});
 	  			}
 	  			else{
-		  			res.redirect('/index');	
+	  				//pass all the user stats 
+		  			res.render('index',{ user: rows[0].Email});	
 	  			}
 	  		}
 		});
