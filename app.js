@@ -6,6 +6,7 @@ var swig  = require('swig');
 
 // var tunnel = require('./routes/tunnel');
 // var sequest = require('sequest')
+var user;
 var bodyParser = require('body-parser'),
 	hostname = process.env.HOSTNAME || 'localhost',
     port = 3000,
@@ -51,6 +52,7 @@ con.connect(function(err){
 	  			}
 	  			else{
 	  				//pass all the user stats 
+	  				user = rows[0].Email;
 		  			res.render('index',{ user: rows[0].Email});	
 	  			}
 	  		}
@@ -78,7 +80,19 @@ con.connect(function(err){
 	  		}
 		});
 	});	
-
+	app.get("/index/userbets",function(req,res,next){
+			con.query("select * from `user-bets` where `Email` = '"+user+"';",
+		  		function(err,rows){
+		  		if(err) 
+		  		{
+		  			console.log("Error encountered : ",err);
+		  			throw err;
+		  		}
+		  		else{
+		  			res.send(rows);	
+		  		}
+			});
+	});	
 	app.post("/teams/performance",function(req,res,next){
 		var team = req.body.team;
 		var attribute = req.body.attribute;
