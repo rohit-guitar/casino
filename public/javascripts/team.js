@@ -95,5 +95,6 @@
 				    "attribute" : selectedAttribute},
 			success: performanceOnSuccess
 		});
-	})
+	});
+	
 })();

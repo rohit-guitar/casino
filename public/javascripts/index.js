@@ -1,5 +1,5 @@
 (function(){
-	var baseURL = "http://glacial-anchorage-4989.herokuapp.com"
+	var baseURL = "https://glacial-anchorage-4989.herokuapp.com"
 		$.ajax({
 			type: "GET",
 			url: baseURL+ "/index/userbets",
@@ -70,7 +70,14 @@
 			console.log(data);
 			datar=data;
 	   		var table1 = document.getElementById("weekly-schedule");
-	   		
+	   		data.forEach(function(datarow){
+	   			var ps= parseInt(datarow.pointSpread);
+	   			ps.toFixed(2);
+	   			datarow.pointSpread = ps.toString();
+	   			var tb= parseInt(datarow.totalbet);
+	   			tb.toFixed(2);
+	   			datarow.totalbet = tb.toString();
+	   		});
 	   		for(var i=0 ; i<7; i++){
 	   			var row = table1.insertRow(1);
 				var cell1 = row.insertCell(0);
