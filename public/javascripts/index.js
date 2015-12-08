@@ -1,5 +1,5 @@
 (function(){
-	var baseURL = "https://glacial-anchorage-4989.herokuapp.com"
+	var baseURL = "http://glacial-anchorage-4989.herokuapp.com"
 		$.ajax({
 			type: "GET",
 			url: baseURL+ "/index/userbets",
@@ -52,24 +52,51 @@
 	$("#submit-job").click(function(){
 		console.log("clicked here")
 		var date = $("#date-input").val().split(" ")[0];
-		console.log("date : ",date);
-		$.ajaxSetup({
-    		headers: { 'Access-Control-Allow-Origin' : "*"}
+		$.ajax({
+			type: "POST",
+			url: baseURL + "/scores",
+			data: { "file" : "hdfs://130.211.186.99:9000/user/dl/static_odds-0.0.1-SNAPSHOT-jar-with-dependencies.jar",
+				    "className" : "staticOdds",
+				    "args":"["+date+"]"},
+			success: jobSubmitSuccess,
+			error : jobSubmitError
 		});
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "http://130.211.186.99:8998/batches",
-		// 	data: { "file" : "hdfs://130.211.186.99:9000/user/dl/spark-scala-maven-project-0.0.1-SNAPSHOT-jar-with-dependencies.jar",
-		// 		    "className" : "SampleApp",
-		// 		    "args":"["+date+"]"},
-		// 	dataType:"jsonp",
-		// 	success: jobSubmitSuccess,
-		// 	error : jobSubmitError
-		// });
-		$.get("http://130.211.186.99/test.php",jobSubmitSuccess);
-
-		$.post("http://130.211.186.99:8998/batches",{ "file" : "hdfs://130.211.186.99:9000/user/dl/spark-scala-maven-project-0.0.1-SNAPSHOT-jar-with-dependencies.jar",
-					    "className" : "SampleApp",
-					    "args":"["+date+"]"},jobSubmitSuccess);
 	});
+
+		$.ajax({
+			type: "GET",
+			url: baseURL+ "/scores/bets/sql",
+		}).done(function( data ) {
+			console.log(data);
+			datar=data;
+	   		var table1 = document.getElementById("weekly-schedule");
+	   		
+	   		for(var i=0 ; i<7; i++){
+	   			var row = table1.insertRow(1);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(2);
+
+				cell1.innerHTML = data[i].Name;
+				cell2.innerHTML = data[i].Name2;
+				cell3.innerHTML = data[i].pointSpread;
+				cell4.innerHTML = data[i].totalbet;
+
+
+	   		}
+		});
+	// setInterval(function(){
+
+	// }, 40000);
+
+	// $('#loadingDiv')
+ //    .hide()  // Hide it initially
+ //    .ajaxStart(function() {
+ //        $(this).show();
+ //    })
+ //    .ajaxStop(function() {
+ //        $(this).hide();
+ //    })
+;
 })();

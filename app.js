@@ -3,10 +3,13 @@ var path = require('path');
 var mysql = require('mysql');
 var swig  = require('swig');
 // var fs  = require('fs');
+var request = require('request');
+
 
 // var tunnel = require('./routes/tunnel');
 // var sequest = require('sequest')
 var user;
+var sparkId;
 var bodyParser = require('body-parser'),
 	hostname = process.env.HOSTNAME || 'localhost',
     port = 3000,
@@ -146,6 +149,20 @@ con.connect(function(err){
 		});
 		console.log("REQ BODY **** ",req.body.team, req.body.attribute);
 	});
+	app.get("/scores/bets/sql",function(req,res,next){
+
+		con.query("select A.Name,D.Name as Name2,B.totalbet,C.pointSpread from team2013 A inner join totalbet B on A.`Team Code`=B.Team1 inner join pointspread C on C.Team1=A.`Team Code` inner join team2013 D on D.`Team Code`= B.Team2;",
+	  		function(err,rows){
+	  		if(err) 
+	  		{
+	  			console.log("Error encountered : ",err);
+	  			throw err;
+	  		}
+	  		else{
+	  			res.send(rows);	
+	  		}
+		});
+	});
 });
 
 app.get('/', function(req, res, next) {
@@ -167,7 +184,35 @@ app.get('/index', function(req, res, next) {
 app.get("/teams",function(req,res,next){
 	res.render('teams')
 });
+app.post("/scores",function(req,res,next){
 
+	console.log("req.body.file ", req.body);
+	console.log("req.body.file ", req.body.className);
+	console.log("req.body.file ", req.body.args);
+
+	request.post({url:'http://130.211.186.99:8998/batches', 
+		json: {"file":req.body.file,
+				"className" : req.body.className,
+				"args": req.body.args}}, 
+		function(err,httpResponse,body)
+		{
+			if(err)
+				console.log("Erroe : ",err);
+			else{
+				console.log("Body for spark job : ",body);
+				sparkId = body.id;
+			}
+		});
+});
+app.get("/scores/bets",function(req,res,next){
+
+	request.get({url:'http://130.211.186.99:8998/batches/'+id}, 
+		
+		function(err,httpResponse,body)
+		{
+			console.log("REsponse is : ",body);
+		});
+});
 
 module.exports = app;
 console.log("Environment port is : ",process.env.PORT);
